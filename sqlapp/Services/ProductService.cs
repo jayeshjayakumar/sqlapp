@@ -16,7 +16,10 @@ namespace sqlapp.Services
         private SqlConnection GetConnection()
         {
             //referring to connection string storedi in azure app service
-            return new SqlConnection(_configuration.GetConnectionString("SQLConnection"));
+            //return new SqlConnection(_configuration.GetConnectionString("SQLConnection"));
+
+            //this is how we access the configuration from Azure App config
+            return new SqlConnection(_configuration["SQLConnection"]);
         }
 
         public List<Product> GetProducts()

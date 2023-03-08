@@ -7,6 +7,14 @@ builder.Services.AddTransient<IProductService, ProductService>();
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+//Value from the Azure App config access key
+var connectionString = "Endpoint=https://jjwebappconfig.azconfig.io;Id=Ouhu-l8-s0:yKpzLdiGwSGCAyGjd+rY;Secret=1Re3bIDGKc1ivXLb0JzhLa+L/7zSg6kk2kwYCJkeMIQ=";
+
+builder.Host.ConfigureAppConfiguration(builder =>
+{
+    builder.AddAzureAppConfiguration(connectionString);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
