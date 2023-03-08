@@ -9,7 +9,7 @@ namespace sqlapp.Pages
 
         public List<Product> Products;
         private readonly IProductService _productService;
-        public bool IsBeta;
+        public bool IsBeta = false;
         public IndexModel(IProductService productService)
         {
             _productService= productService;

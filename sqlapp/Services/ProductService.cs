@@ -19,9 +19,14 @@ namespace sqlapp.Services
         //Method to obtain the feature flag from Azure
         public async Task<bool> IsBeta()
         {
-            if (await _featureManager.IsEnabledAsync("beta")) 
+            if (await _featureManager.IsEnabledAsync("beta"))
+            {
                 return true;
-            return false;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private SqlConnection GetConnection()
