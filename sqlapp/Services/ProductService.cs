@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using Microsoft.FeatureManagement;
 using sqlapp.Models; 
 
 namespace sqlapp.Services
@@ -7,10 +8,20 @@ namespace sqlapp.Services
     {
 
         private readonly IConfiguration _configuration;
+        private readonly IFeatureManager _featureManager;
 
-        public ProductService(IConfiguration configuration)
+        public ProductService(IConfiguration configuration, IFeatureManager featureManager)
         {
             _configuration = configuration;
+            _featureManager = featureManager;   
+        }
+
+        //Method to obtain the feature flag from Azure
+        public async Task<bool> IsBeta()
+        {
+            if (await _featureManager.IsEnabledAsync("beta")) 
+                return true;
+            return false;
         }
 
         private SqlConnection GetConnection()

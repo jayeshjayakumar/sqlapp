@@ -1,3 +1,4 @@
+using Microsoft.FeatureManagement;
 using sqlapp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,10 +13,13 @@ var connectionString = "Endpoint=https://jjwebappconfig.azconfig.io;Id=Ouhu-l8-s
 
 builder.Host.ConfigureAppConfiguration(builder =>
 {
-    builder.AddAzureAppConfiguration(connectionString);
+    builder.AddAzureAppConfiguration(options => options.Connect(connectionString).UseFeatureFlags());
 });
 
+builder.Services.AddFeatureManagement();
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

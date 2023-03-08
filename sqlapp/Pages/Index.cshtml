@@ -5,7 +5,16 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">These are list of Products</h1>
+
+    @if (Model.IsBeta)
+    {
+        <h1 class="display-4">These are beta version of Products</h1>
+    }
+    else
+    {
+
+        <h1 class="display-4">These are list of Products</h1>
+    }
     <table class="table table-bordered">
         <thead>
             <tr>
